@@ -10,6 +10,7 @@ export class InvoiceComponent implements OnInit {
 
   constructor(private mainService: MainService) { }
 
+  priceNew: any;
   products: any = [];
   productsLength: any;
   invoices: any = [];
@@ -100,6 +101,18 @@ export class InvoiceComponent implements OnInit {
         this.productsLength = response.products.length;
       }
     });
+  }
+
+  getPrice() {
+    console.log('this.priceNew: ', this.priceNew);
+    console.log('this.priceNew.length: ', this.priceNew.length);
+    let totalNew = 0;
+    for (let i = 0; i < this.priceNew.length; i++) {
+      console.log('this.priceNew['+ i +']', parseFloat(this.priceNew[i]));
+      totalNew += parseFloat(this.priceNew[i]);
+    }
+    this.total = totalNew;
+    console.log('totalNew: ', totalNew);
   }
 
   ngOnDestroy() {

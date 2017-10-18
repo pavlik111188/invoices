@@ -5,7 +5,7 @@
         <div class="panel panel-default height">
           <div class="panel-heading">{{ invoice?.customer_name }}</div>
           <div class="panel-body">
-            <strong>Total: {{ invoice?.total }}</strong><br>
+            <strong>Total: ${{ invoice?.total }}</strong><br>
             <br>
             {{invoice?.createdAt}}
           </div>
@@ -33,7 +33,17 @@
         </div>
         <div class="form-group col-md-6">
           <label for="total" class="col-form-label">Total</label>
-          <input [(ngModel)]="total" type="number" class="form-control" id="total" placeholder="Total">
+          <input [(ngModel)]="total" type="number" class="form-control" id="total" placeholder="Total" disabled>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label class="sr-only" for="multipleSelect">Products</label>
+          <div class="">
+            <select id="multipleSelect" multiple class="form-control" [(ngModel)]="priceNew" (change)="getPrice()">
+              <option *ngFor="let product of products" value="{{ product?.price }}">{{ product?.name }}. ${{ product?.price }}</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="form-row">
