@@ -1,0 +1,63 @@
+<h2>Invoices</h2>
+<div *ngIf="invoicesLength > 0; else noInvoices">
+    <div *ngFor="let invoice of invoicesNewArr; let index = index;" class="row">
+      <div class="col-xs-12 col-md-6 col-lg-6 pull-left">
+        <div class="panel panel-default height">
+          <div class="panel-heading">{{ invoice?.customer_name }}</div>
+          <div class="panel-body">
+            <strong>Total: {{ invoice?.total }}</strong><br>
+            <br>
+            {{invoice?.createdAt}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<ng-template #noInvoices>
+  <article>No Invoices</article>
+</ng-template>
+<div class="right">
+  <button type="button" class="btn btn-success" (click)="modal.open()">New Invoice</button>
+</div>
+
+<bs-modal #modal>
+  <bs-modal-header [showDismiss]="true">
+    <h4 class="modal-title">Add a new invoice</h4>
+  </bs-modal-header>
+  <bs-modal-body>
+    <!--<form (ngSubmit)="register()">-->
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="discount" class="col-form-label">Discount</label>
+          <input [(ngModel)]="discountNew" type="number" class="form-control" id="discount" placeholder="Discount">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="total" class="col-form-label">Total</label>
+          <input [(ngModel)]="total" type="number" class="form-control" id="total" placeholder="Total">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="inputCustomer" class="col-form-label">Customer</label>
+          <select id="inputCustomer" name="customer" class="form-control" placeholder="check customer" [(ngModel)]="customerId">
+            <option *ngFor="let customer of customers"
+                    value="{{customer?.id}}"
+            >
+              {{ customer?.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    <div class="form-row">
+      <div *ngIf="isError" class="alert alert-warning">
+        <strong>Please, check a customer!</strong>
+      </div>
+      <div *ngIf="isSuccess" class="alert alert-success">
+        <strong>Success!</strong>
+      </div>
+    </div>
+      <button type="submit" (click)="addInvoice()" class="btn btn-primary">Save</button>
+    <!--</form>-->
+  </bs-modal-body>
+  <bs-modal-footer [showDefaultButtons]="false"></bs-modal-footer>
+</bs-modal>
