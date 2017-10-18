@@ -1,3 +1,6 @@
+# Notice
+I added `var cors = require('cors');` and `app.use(cors());` to the app.js for the access to the Angular App
+
 # Dependencies
 
 - sqlite3
@@ -72,3 +75,8 @@ GET|PUT|DELETE    /api/invoices/{invoice_id}/items/{id}
 ```
 
 
+## Start Angular server
+```
+cd public
+ng serve
+```
